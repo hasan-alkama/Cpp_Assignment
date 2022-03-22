@@ -1,13 +1,7 @@
-/******************************************************************************
-
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
-C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
-Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
-#include <bits/stdc++.h>
-
+#include<iostream>
+#include<algorithm>
+#include<math.h>
+#include<vector>
 using namespace std;
 class Shape
 {
@@ -100,6 +94,84 @@ class Birdflue:public Virus
       }
 };
 
+class Engine
+{
+    public:
+      virtual double GetEfficiency()=0;
+};
+class InternalCombustionEngine:public Engine
+{
+    private:
+      double workDone,energyconsumed;
+    public:
+      InternalCombustionEngine(double p,double v)
+      {
+          workDone=  p;
+          energyconsumed= v;
+      }
+      double GetEfficiency()
+      {
+          return (workDone / energyconsumed)*100;
+      }
+};
+class ExternalCombustionEngine:public Engine
+{
+    private:
+      double workDone,energyconsumed;
+    public:
+      ExternalCombustionEngine(double p,double v)
+      {
+          workDone=  p;
+          energyconsumed= v;
+      }
+      double GetEfficiency()
+      {
+          return (workDone / energyconsumed)*100;
+      }
+};
+class PetrolEngine:public Engine
+{
+    private:
+        double PetrolConsumed, workDone;
+    public:
+        PetrolEngine(double pc,double wd)
+        {
+              PetrolConsumed= pc;
+              workDone= wd;
+        }
+        double GetEfficiency(){
+            return (workDone / PetrolConsumed) * 100;
+        }
+};
+class DieselEngine:public Engine
+{
+    private:
+       double DieselConsumed, workDone;
+    public:
+       DieselEngine(double dc,double wd)
+       {
+           DieselConsumed= dc;
+           workDone= wd;
+       }
+       double GetEfficiency(){
+           return (workDone / DieselConsumed) * 100;
+       }
+};
+class HeatEngine:public Engine
+{
+    private:
+        double HeatConsumed, workDone;
+    public:
+        HeatEngine(double hc,double wd)
+        {
+            HeatConsumed= hc;
+            workDone= wd;
+        }
+        double GetEfficiency(){
+            return (workDone / HeatConsumed) * 100;
+        }
+
+};
 int main()
 {
     Rectangle r1(15,5);
@@ -112,8 +184,17 @@ int main()
     cout<<"the Mortality rate of covid is:"<<cv1.GetMortalityRate()<<endl;
     cout<<"The Mortality rate of HIV is:"<<hv1.GetMortalityRate()<<endl;
     cout<<"The Mortality rate of Birdflue Virus is:"<<bv1.GetMortalityRate()<<endl;
-    
-    
+
+    InternalCombustionEngine ic1(1.73,2.58);
+    cout<<"the efficiency of the ic engine is :"<<ic1.GetEfficiency()<<"%"<<endl;
+    ExternalCombustionEngine ec1(1.73,2.10);
+    cout<<"the efficiency of the ec engine is :"<<ec1.GetEfficiency()<<"%"<<endl;
+    PetrolEngine pe1(200,150);
+    cout<<"the efficiency of the Petrol engine is :"<<pe1.GetEfficiency()<<"%"<<endl;
+    DieselEngine de1(250,190);
+    cout<<"the efficiency of the diesel engine is :"<<de1.GetEfficiency()<<"%"<<endl;
+    HeatEngine he1(195, 190);
+    cout << "the efficiency of Heat engine is :" << he1.GetEfficiency() << "%" << endl;
 
     return 0;
 }
