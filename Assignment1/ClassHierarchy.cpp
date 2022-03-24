@@ -94,42 +94,46 @@ class Birdflue:public Virus
       }
 };
 
-class Engine
+// class Engine
+// {
+//     public:
+//       virtual double GetEfficiency()=0;
+// };
+class InternalCombustionEngine
 {
+    // private:
+    //   double workDone,energyconsumed;
+    // public:
+    //   InternalCombustionEngine(double p,double v)
+    //   {
+    //       workDone=  p;
+    //       energyconsumed= v;
+    //   }
+    //   double GetEfficiency()
+    //   {
+    //       return (workDone / energyconsumed)*100;
+    //   }
     public:
       virtual double GetEfficiency()=0;
 };
-class InternalCombustionEngine:public Engine
+class ExternalCombustionEngine
 {
-    private:
-      double workDone,energyconsumed;
+    // private:
+    //   double workDone,energyconsumed;
+    // public:
+    //   ExternalCombustionEngine(double p,double v)
+    //   {
+    //       workDone=  p;
+    //       energyconsumed= v;
+    //   }
+    //   double GetEfficiency()
+    //   {
+    //       return (workDone / energyconsumed)*100;
+    //   }
     public:
-      InternalCombustionEngine(double p,double v)
-      {
-          workDone=  p;
-          energyconsumed= v;
-      }
-      double GetEfficiency()
-      {
-          return (workDone / energyconsumed)*100;
-      }
+       virtual double GetEfficiency() = 0;
 };
-class ExternalCombustionEngine:public Engine
-{
-    private:
-      double workDone,energyconsumed;
-    public:
-      ExternalCombustionEngine(double p,double v)
-      {
-          workDone=  p;
-          energyconsumed= v;
-      }
-      double GetEfficiency()
-      {
-          return (workDone / energyconsumed)*100;
-      }
-};
-class PetrolEngine:public Engine
+class PetrolEngine:public InternalCombustionEngine
 {
     private:
         double PetrolConsumed, workDone;
@@ -143,7 +147,7 @@ class PetrolEngine:public Engine
             return (workDone / PetrolConsumed) * 100;
         }
 };
-class DieselEngine:public Engine
+class DieselEngine:public InternalCombustionEngine
 {
     private:
        double DieselConsumed, workDone;
@@ -157,7 +161,7 @@ class DieselEngine:public Engine
            return (workDone / DieselConsumed) * 100;
        }
 };
-class HeatEngine:public Engine
+class HeatEngine:public ExternalCombustionEngine
 {
     private:
         double HeatConsumed, workDone;
@@ -185,10 +189,10 @@ int main()
     cout<<"The Mortality rate of HIV is:"<<hv1.GetMortalityRate()<<endl;
     cout<<"The Mortality rate of Birdflue Virus is:"<<bv1.GetMortalityRate()<<endl;
 
-    InternalCombustionEngine ic1(1.73,2.58);
-    cout<<"the efficiency of the ic engine is :"<<ic1.GetEfficiency()<<"%"<<endl;
-    ExternalCombustionEngine ec1(1.73,2.10);
-    cout<<"the efficiency of the ec engine is :"<<ec1.GetEfficiency()<<"%"<<endl;
+    // InternalCombustionEngine ic1(1.73,2.58);
+    // cout<<"the efficiency of the ic engine is :"<<ic1.GetEfficiency()<<"%"<<endl;
+    // ExternalCombustionEngine ec1(1.73,2.10);
+    // cout<<"the efficiency of the ec engine is :"<<ec1.GetEfficiency()<<"%"<<endl;
     PetrolEngine pe1(200,150);
     cout<<"the efficiency of the Petrol engine is :"<<pe1.GetEfficiency()<<"%"<<endl;
     DieselEngine de1(250,190);
