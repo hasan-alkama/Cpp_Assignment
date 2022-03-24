@@ -94,87 +94,82 @@ class Birdflue:public Virus
       }
 };
 
-// class Engine
-// {
-//     public:
-//       virtual double GetEfficiency()=0;
-// };
-class InternalCombustionEngine
+class Engine
 {
-    // private:
-    //   double workDone,energyconsumed;
-    // public:
-    //   InternalCombustionEngine(double p,double v)
-    //   {
-    //       workDone=  p;
-    //       energyconsumed= v;
-    //   }
-    //   double GetEfficiency()
-    //   {
-    //       return (workDone / energyconsumed)*100;
-    //   }
-    public:
-      virtual double GetEfficiency()=0;
+    protected:
+        double heat;
+        double work;
+        double efficiency;
+        virtual double GetEfficiency() = 0;
 };
-class ExternalCombustionEngine
+class InternalCombustionEngine:public Engine
 {
-    // private:
-    //   double workDone,energyconsumed;
-    // public:
-    //   ExternalCombustionEngine(double p,double v)
-    //   {
-    //       workDone=  p;
-    //       energyconsumed= v;
-    //   }
-    //   double GetEfficiency()
-    //   {
-    //       return (workDone / energyconsumed)*100;
-    //   }
-    public:
-       virtual double GetEfficiency() = 0;
+    
 };
+
 class PetrolEngine:public InternalCombustionEngine
 {
-    private:
-        double PetrolConsumed, workDone;
     public:
-        PetrolEngine(double pc,double wd)
-        {
-              PetrolConsumed= pc;
-              workDone= wd;
-        }
-        double GetEfficiency(){
-            return (workDone / PetrolConsumed) * 100;
-        }
+      PetrolEngine()
+      {
+        cout << "Enter the Heat input of the Petrol engine: ";
+		cin >> heat;
+		cout << "Enter the Work output of the Petrol engine: ";
+		cin >> work;
+      }
+      double GetEfficiency(){
+          if(heat>=work)
+          {
+              efficiency = work / heat;
+              return efficiency;
+          }
+           else
+          cout<<"Incorrect Input"<<endl;
+      }
 };
 class DieselEngine:public InternalCombustionEngine
 {
-    private:
-       double DieselConsumed, workDone;
     public:
-       DieselEngine(double dc,double wd)
+       DieselEngine()
        {
-           DieselConsumed= dc;
-           workDone= wd;
+        cout << "Enter the Heat input of the Diesel engine: ";
+		cin >> heat;
+		cout << "Enter the Work output of the Diesel engine: ";
+		cin >> work;
        }
-       double GetEfficiency(){
-           return (workDone / DieselConsumed) * 100;
-       }
+      double GetEfficiency(){
+          if(heat>=work)
+          {
+              efficiency = work / heat;
+              return efficiency;
+          }
+          else
+          cout<<"Incorrect Input"<<endl;
+      }
 };
-class HeatEngine:public ExternalCombustionEngine
+class ExternalCombustionEngine:public Engine
 {
-    private:
-        double HeatConsumed, workDone;
+    
+};
+class SteamEngine:public ExternalCombustionEngine
+{
     public:
-        HeatEngine(double hc,double wd)
-        {
-            HeatConsumed= hc;
-            workDone= wd;
-        }
-        double GetEfficiency(){
-            return (workDone / HeatConsumed) * 100;
-        }
-
+      double GetEfficiency() {
+	  	if (heat >= work) {
+	  		efficiency =work/heat;
+	  		return efficiency;
+	  	}
+	  	else
+	  	{
+	  		cout << "Incorrect Entry";
+	  	}
+	  }
+	  SteamEngine() { //constructor
+	  	cout << "Enter the Heat input of the Steam engine: ";
+	  	cin >> heat;
+	  	cout << "Enter the Work output of the Steam engine: ";
+	  	cin >> work;
+	  }
 };
 int main()
 {
@@ -193,11 +188,11 @@ int main()
     // cout<<"the efficiency of the ic engine is :"<<ic1.GetEfficiency()<<"%"<<endl;
     // ExternalCombustionEngine ec1(1.73,2.10);
     // cout<<"the efficiency of the ec engine is :"<<ec1.GetEfficiency()<<"%"<<endl;
-    PetrolEngine pe1(200,150);
+    PetrolEngine pe1;
     cout<<"the efficiency of the Petrol engine is :"<<pe1.GetEfficiency()<<"%"<<endl;
-    DieselEngine de1(250,190);
+    DieselEngine de1;
     cout<<"the efficiency of the diesel engine is :"<<de1.GetEfficiency()<<"%"<<endl;
-    HeatEngine he1(195, 190);
+    SteamEngine he1;
     cout << "the efficiency of Heat engine is :" << he1.GetEfficiency() << "%" << endl;
 
     return 0;
